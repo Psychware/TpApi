@@ -34,10 +34,11 @@ const addTask = async (req: Request, res: Response): Promise<void> => {
 // }
 
 // getAllUsers 
-const getAllTask = async (req: Request, res: Response): Promise<void> => {
+const getAllTasks = async (req: Request, res: Response): Promise<void> => {
     try {
+        console.log("getAllTasks");
         const tasks:ITask[] = await Task.find().populate('user');
-         console.log(tasks[0].user)
+         
         // const user:IUser = tasks[0].user.
         tasks ? res.json(tasks) : res.status(404).send({error : {
             code : 404,
@@ -46,24 +47,27 @@ const getAllTask = async (req: Request, res: Response): Promise<void> => {
     } catch (e) {
         res.status(500).json({error : e});
     }
-}
+} 
+// getAllUsers 
+const getTaskById = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const id =  req.params.id;
+        console.log("getTaskById");
+        console.log(id);
+        const task = await Task.findById(id).populate("user");
+         
+        // const user:IUser = tasks[0].user.
+        task ? res.json(task) : res.status(404).send({error : {
+            code : 404,
+            message : "Not found"
+        }});
+    } catch (e) {
+        res.status(500).json({error : e});
+    }
+} 
 
-// //Delete :
-// const deleteTask = async (req: Request, res: Response):Promise<void> => {
-//     const id = req.params.id;
-//     try {
-//         const  user = await User.findByIdAndDelete(id);
-//         user ? res.json(user) : res.status(404).send({error : {
-//                 code : 404,
-//                 message : "Not Found"
-//             }})
-//     } catch (e){
-//         res.status(500).json({error : e})
-//     }
 
-// }
-// export { addTask, getTaskById , getAllTask, deleteTask }
 
-export { addTask , getAllTask}
+export { addTask , getAllTasks, getTaskById}
 
 

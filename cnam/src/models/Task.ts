@@ -15,7 +15,7 @@ const TaskSchema  = new Schema<ITask>({
     },
     user : {
         type : Schema.Types.ObjectId,
-        ref : 'users',
+        ref : 'User',
         // unique : true,
         required : true
         

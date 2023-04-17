@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import  { connect } from 'mongoose';
 import { getAllUsers, getUserById, addUser, deleteUser } from './handlers/User';
-import { addTask , getAllTask} from './handlers/Task';
+import { addTask , getAllTasks, getTaskById} from './handlers/Task';
 // import { getTaskById, getAllTask, addTask, deleteTask } from './handlers/Task';
 
 
@@ -14,11 +14,13 @@ app.use(express.json());
 // Routes pour users
 app.get('/users/:id', getUserById);
 app.get('/users', getAllUsers );
-app.post('/users', addUser);
+app.post('/user', addUser);
 app.get('/deleteUser/:id', deleteUser);
 
 // app.get('/task/:id', getTaskById);
-app.get('/task', getAllTask );
+
+app.get('/task/:id', getTaskById );
+app.get('/tasks', getAllTasks );
 app.post('/task', addTask);
 // app.get('/task/:id', deleteTask);
 //  * /tasks -> addTask(post) -> getAlltask (get)
