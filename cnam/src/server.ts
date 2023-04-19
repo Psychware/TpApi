@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import  { connect } from 'mongoose';
-import { getAllUsers, getUserById, addUser, deleteUser } from './handlers/User';
-import { addTask , getAllTasks, getTaskById} from './handlers/Task';
+import { getAllUsers, getUserById, addUser, deleteUserById } from './handlers/User';
+import { addTask , getAllTasks, getTaskById,deleteTaskById} from './handlers/Task';
 // import { getTaskById, getAllTask, addTask, deleteTask } from './handlers/Task';
 
 
@@ -11,23 +11,18 @@ const app: Application = express();
 app.use(express.json());
 
 
-// Routes pour users
-app.get('/users/:id', getUserById);
+// Routes pour User
+app.get('/user/:id', getUserById);
 app.get('/users', getAllUsers );
 app.post('/user', addUser);
-app.get('/deleteUser/:id', deleteUser);
+app.get('deleteUserById/:id', deleteUserById);
 
-// app.get('/task/:id', getTaskById);
 
+//Routes pour Task
 app.get('/task/:id', getTaskById );
 app.get('/tasks', getAllTasks );
 app.post('/task', addTask);
-// app.get('/task/:id', deleteTask);
-//  * /tasks -> addTask(post) -> getAlltask (get)
-//  * /tasks/:id 
-//  * /users/:id/tasks
-//  * /tasks/:id -> delete
-
+app.get('/deleteTaskById/:id', deleteTaskById);
 
 const dbConnect = async (): Promise<void> => {
 
@@ -39,7 +34,6 @@ const dbConnect = async (): Promise<void> => {
         console.log(error);
     }
 }
-
 
 // start server
 app.listen(port, async () => {

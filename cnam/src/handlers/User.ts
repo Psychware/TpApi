@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import { User, IUser } from "../models/User";
 
-
-
-// create user 
+// Ajoute un utilisateur
 const addUser = async (req: Request, res: Response): Promise<void> => {
     
     const user = new User(req.body);
@@ -17,7 +15,7 @@ const addUser = async (req: Request, res: Response): Promise<void> => {
     
 }
 
-// getUserByID
+// Récupère un utilisateur par son id
 const getUserById = async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id;
     try {
@@ -32,7 +30,7 @@ const getUserById = async (req: Request, res: Response): Promise<void> => {
 
 }
 
-// getAllUsers 
+// Récupère tous les utilisateurs 
 const getAllUsers = async (req: Request, res: Response): Promise<void> => {
     try {
         const users:IUser[] = await User.find();
@@ -45,8 +43,8 @@ const getAllUsers = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-//Delete :
-const deleteUser = async (req: Request, res: Response):Promise<void> => {
+// Supprime un utilisateur par son id
+const deleteUserById = async (req: Request, res: Response):Promise<void> => {
     const id = req.params.id;
     try {
         const  user = await User.findByIdAndDelete(id);
@@ -59,7 +57,7 @@ const deleteUser = async (req: Request, res: Response):Promise<void> => {
     }
 
 }
-export { addUser, getUserById, getAllUsers,deleteUser }
+export { addUser, getUserById, getAllUsers,deleteUserById }
 
 
 
