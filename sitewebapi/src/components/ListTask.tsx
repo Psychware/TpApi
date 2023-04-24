@@ -25,9 +25,12 @@ const  ListTask: FC = ()=>{
             <table>
                 <thead>
                     <tr>
-                        <th>NOM</th>
-                        <th>EMAIL</th>
-                        <th>Name</th>
+                        <th>Nom de la tâche</th>
+                        <th>Détails</th>
+                        <th>Statut</th>
+                        <th>Date</th>
+                        <th>Utilisateur</th>
+                        <th>@</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,8 +38,11 @@ const  ListTask: FC = ()=>{
                         return (
                             <tr key={key}>
                                 <td>{val.name}</td>
-                                <td>{val.user.email}</td>
+                                <td>{val.details}</td>
+                                <td>{val.statut}</td>
+                                <td>{val.dates}</td>
                                 <td>{val.user.name}</td>
+                                <td>{val.user.email}</td>
                             </tr>
                         )}
                     )}

@@ -15,6 +15,8 @@ interface FormData {
     name : string;
     user : string ;
     statut : string;
+    details : string;
+    dates : Date;
 }
 
 const FormTaskAdd = ({ onSubmit, iduser , task}: FormProps) => {
@@ -23,8 +25,9 @@ const FormTaskAdd = ({ onSubmit, iduser , task}: FormProps) => {
         // _id: task? task._id : null,
         name: task && task.name ? task.name : '',
         user: iduser ?? "",
-
         statut: task && task.statut ? task.statut : '',
+        details:  task && task.details ? task.details : '',
+        dates: task && task.dates ? new Date(task.dates) : new Date(),
         
     });
 
@@ -32,7 +35,11 @@ const FormTaskAdd = ({ onSubmit, iduser , task}: FormProps) => {
         const { name, value } = event.target;
         console.log(value);
         
-        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+        if (event.target.name === 'date') {
+            setFormData((prevFormData) => ({...prevFormData, [name]: new Date(event.target.value.toString())}));
+        } else {
+            setFormData((prevFormData) => ({...prevFormData, [name]: value}));
+        }
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,7 +47,7 @@ const FormTaskAdd = ({ onSubmit, iduser , task}: FormProps) => {
         console.log(iduser)
         console.log(formData)
         onSubmit(formData);
-        setFormData({ name: "", user: "" ,statut:""});
+        setFormData({ name: "", user: "" ,statut:"",details:"",dates: new Date()});
     };
 
     return (
@@ -61,6 +68,25 @@ const FormTaskAdd = ({ onSubmit, iduser , task}: FormProps) => {
                     type="text"
                     name="statut"
                     value={formData.statut}
+                    onChange={handleChange}
+                />
+            </label>
+
+            <label>
+                Details :
+                <input
+                    type="text"
+                    name="details"
+                    value={formData.details}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>
+                Date :
+                <input
+                    type="text"
+                    name="dates"
+                    value={new Date(formData.dates).toISOString().split("T")[0]}
                     onChange={handleChange}
                 />
             </label>

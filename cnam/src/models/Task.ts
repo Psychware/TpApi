@@ -4,7 +4,9 @@ import { User, IUser } from "./User";
 interface ITask {
     name : string;
     user : ObjectId | IUser;
+    details : string;
     statut : string;
+    dates : Date;
 }; 
 
 const TaskSchema  = new Schema<ITask>({
@@ -23,7 +25,16 @@ const TaskSchema  = new Schema<ITask>({
     statut : {
         type : String,
         required : true
+    },
+    details : {
+        type : String,
+        required : false
+    },
+    dates : {
+        type : Date,
+        required : false
     }
+
 
 });
 

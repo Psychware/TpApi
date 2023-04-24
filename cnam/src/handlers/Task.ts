@@ -14,7 +14,20 @@ const addTask = async (req: Request, res: Response): Promise<void> => {
 
     
 }
+// mise à jour de la tâche
+const updateTaskById = async (req: Request, res: Response): Promise<void> =>
+{
+    const id: string = req.params.id;
 
+    try {
+        await Task.findByIdAndUpdate(id, req.body);
+        res.status(200).json(await Task.findById(id));
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
 // Récupère tous les utilisateurs 
 const getAllTasks = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -80,6 +93,6 @@ const deleteTaskById = async (req: Request, res: Response): Promise<void> => {
 } 
 
 
-export { addTask , getAllTasks, getTaskById, deleteTaskById,getTasksByUser}
+export { addTask , getAllTasks, getTaskById, deleteTaskById,getTasksByUser,updateTaskById}
 
 

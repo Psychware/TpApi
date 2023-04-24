@@ -5,6 +5,8 @@ export default interface Task{
         name : string;
         user : User  ;
         statut : string;
+        details : string;
+        dates : string;
    
 
 }
