@@ -1,7 +1,7 @@
 import User from "../types/User";
 
 export default interface Task{
-        // _id : string;
+         _id : string;
         name : string;
         user : User  ;
         statut : string;

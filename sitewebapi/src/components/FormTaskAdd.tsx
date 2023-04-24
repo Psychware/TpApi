@@ -11,7 +11,7 @@ interface FormProps {
 
 
 interface FormData {
-    // _id? : string | null;
+     _id? : string | null;
     name : string;
     user : string ;
     statut : string;
@@ -20,11 +20,11 @@ interface FormData {
 }
 
 const FormTaskAdd = ({ onSubmit, iduser , task}: FormProps) => {
-    console.log(task);
+    console.log("ok"+task?._id);
     const [formData, setFormData] = useState<FormData>({
-        // _id: task? task._id : null,
+         _id: task? task._id : null,
         name: task && task.name ? task.name : '',
-        user: iduser ?? "",
+        user: iduser ?? task?.user ?? "",
         statut: task && task.statut ? task.statut : '',
         details:  task && task.details ? task.details : '',
         dates: task && task.dates ? new Date(task.dates) : new Date(),
@@ -45,6 +45,7 @@ const FormTaskAdd = ({ onSubmit, iduser , task}: FormProps) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log(iduser)
+        console.log(task?._id)
         console.log(formData)
         onSubmit(formData);
         setFormData({ name: "", user: "" ,statut:"",details:"",dates: new Date()});

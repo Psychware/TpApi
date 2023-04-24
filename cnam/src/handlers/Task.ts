@@ -17,7 +17,10 @@ const addTask = async (req: Request, res: Response): Promise<void> => {
 // mise à jour de la tâche
 const updateTaskById = async (req: Request, res: Response): Promise<void> =>
 {
+    console.log("getTaskById");
+
     const id: string = req.params.id;
+    console.log(id);
 
     try {
         await Task.findByIdAndUpdate(id, req.body);

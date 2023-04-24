@@ -3,10 +3,13 @@ import React, {FC, useState, useEffect} from "react";
 import User from "../types/User";
 import Task from "../types/Task";
 import { getAllTasks } from "../services/task.service";
+import {Link} from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import {IoPencilSharp} from "react-icons/io5";
 // import {getUsers} from "../services/user.service";
 
 const  ListTask: FC = ()=>{
-    const [task, setUsers] = useState<Task[]>([]);
+    const [task, setTask] = useState<Task[]>([]);
     const [refresh] = useState(0);
     // console.log("ok");
     useEffect( ()=>{
@@ -14,7 +17,7 @@ const  ListTask: FC = ()=>{
            
             const task:Task[] = await getAllTasks();
             console.log(task);
-                setUsers(task);
+                setTask(task);
         }
         getData();
     },[refresh]);
@@ -43,6 +46,12 @@ const  ListTask: FC = ()=>{
                                 <td>{val.dates}</td>
                                 <td>{val.user.name}</td>
                                 <td>{val.user.email}</td>
+                                <td>
+                                <Link to ={'/tasks/' + val._id }>
+                                    <Button variant="primary" className='iconButton'><IoPencilSharp /> Modifier la tâche</Button>
+                                </Link>
+
+                            </td>
                             </tr>
                         )}
                     )}

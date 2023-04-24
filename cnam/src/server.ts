@@ -24,7 +24,7 @@ app.get('/tasks', getAllTasks );
 app.post('/task', addTask);
 app.get('/tasks/:id', getTasksByUser);
 app.get('/deleteTaskById/:id', deleteTaskById);
-app.get('/updateTaskById/:id', updateTaskById);
+app.put('/updateTaskById/:id', updateTaskById);
 
 
 const dbConnect = async (): Promise<void> => {

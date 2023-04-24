@@ -40,6 +40,37 @@ const getTaskByUser = async (id: string) => {
     }
 
 }
+const getTaskById = async (id: any) => {
 
+    try {
+        console.log(id);
+        const response = await fetch('/task/'+id);
+        const tasks = await response.json();
 
-export {getAllTasks, addTask,getTaskByUser}
+        return tasks;
+
+    }catch (error) {
+
+        console.log(error)
+
+    }
+
+}
+
+const updateTask = async (task : Task)=>{
+    console.log("update")
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task)
+    };
+    try {
+        console.log(task._id)
+        const response =  await fetch('/updateTaskById/'+task._id, requestOptions);
+        const taskSave = await response.json();
+        return taskSave;
+    } catch(e) {
+        console.log(e)
+    }
+}
+export {getAllTasks, addTask,getTaskByUser,getTaskById,updateTask}
