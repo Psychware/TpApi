@@ -1,20 +1,22 @@
 import React, {FC} from "react";
 import '../assets/css/App.css';
 // import Footer from "../components/Footer";
-import ListTask from "../components/ListTask";
+import ListTaskByUser from "../components/ListTaskByUser";
 // import Title from "../components/Title";
 import logo from "../assets/logo.svg";
+import {useParams} from "react-router-dom";
 
-const User:FC = ()=>{
+const TaskByIdUser:FC = ()=>{
+    const {idUser} = useParams();
     return(
 
         <header className="App-header">
          
-         <ListTask/>
+         <ListTaskByUser  iduser={idUser}/>
         
     
         </header>
 
     )
 }
-export default User;
+export default TaskByIdUser;

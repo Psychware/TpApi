@@ -48,6 +48,23 @@ const getTaskById = async (req: Request, res: Response): Promise<void> => {
     }
 } 
 
+//Récupère les tâche d'un utilisateur
+const getTasksByUser = async (req: Request, response: Response): Promise<void> => {
+    console.log("getTasksByUser");
+    const id = req.params.id;
+ 
+    try {
+        const task : ITask[] = await Task.find({"user": id}).populate("user");
+        task ? response.json(task) : response.status(404).send({error : {
+                code : 404,
+                message : "Not found"
+            }});
+    }catch(error) {
+        response.status(500).json({error : error});
+    }
+
+}
+
 // Supprime une tâche 
 const deleteTaskById = async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id;
@@ -63,6 +80,6 @@ const deleteTaskById = async (req: Request, res: Response): Promise<void> => {
 } 
 
 
-export { addTask , getAllTasks, getTaskById, deleteTaskById}
+export { addTask , getAllTasks, getTaskById, deleteTaskById,getTasksByUser}
 
 

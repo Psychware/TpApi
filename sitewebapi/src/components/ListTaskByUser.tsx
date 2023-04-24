@@ -2,17 +2,20 @@ import React, {FC, useState, useEffect} from "react";
 // import React, {FC, useState, useEffect, Dispatch} from "react";
 import User from "../types/User";
 import Task from "../types/Task";
-import { getAllTasks } from "../services/task.service";
+import { getTaskByUser } from "../services/task.service";
 // import {getUsers} from "../services/user.service";
-
-const  ListTask: FC = ()=>{
+interface Props {
+    iduser: any;
+}
+const  ListTaskByUser: FC<Props> = ({iduser}: Props)=>{
+    
     const [task, setUsers] = useState<Task[]>([]);
     const [refresh] = useState(0);
     // console.log("ok");
     useEffect( ()=>{
         const getData = async ()=>{
            
-            const task:Task[] = await getAllTasks();
+            const task:Task[] = await getTaskByUser(iduser);
             console.log(task);
                 setUsers(task);
         }
@@ -21,7 +24,8 @@ const  ListTask: FC = ()=>{
 
     return (
         <div>
-            <h3>Liste des tâches</h3>
+
+            <h3>Liste des tâches de l'utilisateur : {iduser}</h3>
             <table>
                 <thead>
                     <tr>
@@ -48,4 +52,4 @@ const  ListTask: FC = ()=>{
 
     )
 }
-export default ListTask;
+export default ListTaskByUser;

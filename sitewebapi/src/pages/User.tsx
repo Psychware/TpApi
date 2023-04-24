@@ -11,7 +11,7 @@ const User:FC = ()=>{
         <header className="App-header">
          
                 <div> <ListUsers /></div>
-
+                <a className="App-link"href="http://localhost:3000/adduser"> Ajouter un utilisateur</a>
     
         </header>
 

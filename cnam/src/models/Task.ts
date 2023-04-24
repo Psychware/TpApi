@@ -4,7 +4,7 @@ import { User, IUser } from "./User";
 interface ITask {
     name : string;
     user : ObjectId | IUser;
-    statut : boolean;
+    statut : string;
 }; 
 
 const TaskSchema  = new Schema<ITask>({
@@ -21,7 +21,7 @@ const TaskSchema  = new Schema<ITask>({
         
     },
     statut : {
-        type : Boolean,
+        type : String,
         required : true
     }
 

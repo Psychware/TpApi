@@ -1,6 +1,10 @@
 import React, {FC, useState, useEffect} from "react";
+import {getAllUsers, addUser} from "../services/user.service";
 // import React, {FC, useState, useEffect, Dispatch} from "react";
 import User from "../types/User";
+import {IoEyeSharp, IoAddCircle} from 'react-icons/io5';
+import {Link} from "react-router-dom";
+import Button from "react-bootstrap/Button";
 // import {getUsers} from "../services/user.service";
 
 const  ListUsers: FC = ()=>{
@@ -9,10 +13,10 @@ const  ListUsers: FC = ()=>{
     // console.log("ok");
     useEffect( ()=>{
         const getData = async ()=>{
-            const response = await fetch('/users');
-            const users:User[] = await response.json();
+            
+            const users:User[] = await getAllUsers();
             console.log(users);
-                setUsers(users);
+            setUsers(users);
         }
         getData();
     },[refresh]);
@@ -34,6 +38,18 @@ const  ListUsers: FC = ()=>{
                             <tr key={key}>
                                 <td>{val.name}</td>
                                 <td>{val.email}</td>
+                                <td>
+                                    <Link to ={'/taskByIdUser/'+val._id}>
+                                        <Button variant="primary" className='iconButton'><IoEyeSharp /> Voir les tâches</Button>
+                                    </Link>
+                                </td>
+                                <td>
+
+                                    <Link to ={'/addtask/' + val._id}>
+                                            <Button variant="primary" className='iconButton'><IoAddCircle /> Ajouter une tâche</Button>
+                                    </Link>
+                                </td>
+                                
                             </tr>
                         )}
                     )}

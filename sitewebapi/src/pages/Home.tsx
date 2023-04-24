@@ -5,7 +5,8 @@ import '../assets/css/App.css';
 // import Title from "../components/Title";
 import logo from "../assets/logo.svg";
 
-const User:FC = ()=>{
+
+const Home:FC = ()=>{
     return(
 
         <header className="App-header">
@@ -17,4 +18,4 @@ const User:FC = ()=>{
 
     )
 }
-export default User;
+export default Home;

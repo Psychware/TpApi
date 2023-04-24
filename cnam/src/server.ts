@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import  { connect } from 'mongoose';
 import { getAllUsers, getUserById, addUser, deleteUserById } from './handlers/User';
-import { addTask , getAllTasks, getTaskById,deleteTaskById} from './handlers/Task';
+import { addTask , getAllTasks, getTaskById,deleteTaskById,getTasksByUser} from './handlers/Task';
 // import { getTaskById, getAllTask, addTask, deleteTask } from './handlers/Task';
 
 
@@ -22,6 +22,7 @@ app.get('deleteUserById/:id', deleteUserById);
 app.get('/task/:id', getTaskById );
 app.get('/tasks', getAllTasks );
 app.post('/task', addTask);
+app.get('/tasks/:id', getTasksByUser);
 app.get('/deleteTaskById/:id', deleteTaskById);
 
 const dbConnect = async (): Promise<void> => {
